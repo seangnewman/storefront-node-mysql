@@ -47,13 +47,26 @@ mySQL.createConnection({
          
     }
    console.log(table.toString());
+    
+   var bProducts = []
+   for( var i=0; i < rows.length; i++){
+        var productionObject = {
+            name: rows[i].product_name,
+            value : rows[i].price,
+            short : rows[i].product_id
+        };
+
+        bProducts.push(productionObject);
+   }
 
    var productObj = {
-    type : 'input',
+    type : 'list',
     name : 'product_id',
-    message : 'Which item id would you like to purchase?'
+    message : 'Which item id would you like to purchase?',
+    choices : bProducts
 
 };
+    console.log(rows);
 
    inquirer.prompt([productObj])
   .then(results => console.log(results.product_id));
